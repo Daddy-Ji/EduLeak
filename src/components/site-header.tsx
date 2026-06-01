@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
-import { LEVELS, SITE_NAME } from "@/lib/seo";
+import { Menu, X, Send } from "lucide-react";
+import { SITE_NAME, TELEGRAM_URL } from "@/lib/seo";
 
 const nav = [
   { to: "/courses", label: "Courses" },
@@ -50,7 +50,7 @@ export function SiteHeader() {
         </button>
       </div>
       {open && (
-        <div className="md:hidden border-t border-border bg-background">
+        <div className="md:hidden border-t border-border bg-background animate-fade-in">
           <div className="container-edit flex flex-col py-4 gap-3">
             {nav.map((n) => (
               <Link key={n.to} to={n.to} className="py-1 text-base text-ink">
@@ -58,12 +58,14 @@ export function SiteHeader() {
               </Link>
             ))}
             <div className="rule-thin my-2" />
-            <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Levels</p>
-            {LEVELS.map((l) => (
-              <Link key={l.slug} to="/levels/$level" params={{ level: l.slug }} className="text-sm text-ink/80">
-                {l.label}
-              </Link>
-            ))}
+            <a
+              href={TELEGRAM_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-ink"
+            >
+              <Send className="size-4 text-gold" /> Join Telegram channel
+            </a>
             <Link to="/login" className="text-[11px] mt-2 uppercase tracking-[0.2em] text-muted-foreground">
               Admin sign in
             </Link>
