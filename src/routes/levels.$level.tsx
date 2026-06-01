@@ -41,7 +41,7 @@ function LevelPage() {
       <div className="mt-8">
         {courses.length === 0
           ? <p className="text-sm text-muted-foreground py-8">No courses for this level yet.</p>
-          : courses.map((c, i) => <CourseCard key={c.id} course={c} index={i} />)}
+          : courses.map((c: any, i: number) => <CourseCard key={c.id} course={c} index={i} />)}
       </div>
     </div>
   );
