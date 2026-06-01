@@ -16,7 +16,7 @@ function NewCourse() {
   const navigate = useNavigate();
   const [mode, setMode] = useState<"manual" | "import">("manual");
   const [form, setForm] = useState({
-    title: "", slug: "", description: "", level: LEVELS[0].slug, subject: SUBJECTS[0],
+    title: "", slug: "", description: "", level: LEVELS[0].slug as string, subject: SUBJECTS[0] as string,
     cover_url: "", seo_title: "", seo_description: "", redirect_url: "", source_type: "manual" as const,
     published: false,
   });
