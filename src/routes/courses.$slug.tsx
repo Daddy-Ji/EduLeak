@@ -91,14 +91,14 @@ function CourseDetail() {
         <div className="mt-14 rule pt-10">
           <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground mb-6">Contents</p>
           <ol className="space-y-12">
-            {chapters.map((ch, i) => (
+            {chapters.map((ch: any, i: number) => (
               <li key={ch.id}>
                 <div className="flex items-baseline gap-4">
                   <span className="num-display text-3xl text-gold">{String(i + 1).padStart(2, "0")}</span>
                   <h2 className="font-display text-2xl sm:text-3xl">{ch.title}</h2>
                 </div>
                 <ul className="mt-5 space-y-8 sm:pl-12">
-                  {ch.lessons.map((l) => {
+                  {ch.lessons.map((l: any) => {
                     const embed = youtubeEmbed(l.video_url);
                     return (
                       <li key={l.id} className="border-l border-border pl-5">
