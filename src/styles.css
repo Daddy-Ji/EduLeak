@@ -130,4 +130,51 @@
     background-position: 0 88%;
   }
   .num-display { font-family: var(--font-display); font-feature-settings: "lnum","tnum"; font-variant-numeric: tabular-nums; }
+
+  @keyframes el-fade-up {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes el-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes el-scale-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes el-blob {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(20px,-30px) scale(1.08); }
+  }
+  @keyframes el-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .animate-fade-in { animation: el-fade-in .5s ease-out both; }
+  .animate-fade-up { animation: el-fade-up .7s cubic-bezier(.2,.7,.2,1) both; }
+  .animate-scale-in { animation: el-scale-in .5s ease-out both; }
+  .animate-blob { animation: el-blob 14s ease-in-out infinite; }
+  .delay-100 { animation-delay: .1s; }
+  .delay-200 { animation-delay: .2s; }
+  .delay-300 { animation-delay: .3s; }
+  .delay-400 { animation-delay: .4s; }
+  .delay-500 { animation-delay: .5s; }
+
+  .shimmer-text {
+    background: linear-gradient(90deg, var(--ink) 0%, var(--gold) 50%, var(--ink) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: el-shimmer 6s linear infinite;
+  }
+
+  .hover-lift { transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s; }
+  .hover-lift:hover { transform: translateY(-3px); }
+
+  .blob {
+    position: absolute; border-radius: 9999px; filter: blur(60px);
+    pointer-events: none; opacity: .5;
+  }
 }

@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { listPublishedCourses } from "@/lib/courses.functions";
 import { CourseCard } from "@/components/course-card";
-import { LEVELS, SUBJECTS } from "@/lib/seo";
+import { LEVELS } from "@/lib/seo";
 
 const qo = queryOptions({
   queryKey: ["courses", "all"],
@@ -39,14 +39,6 @@ function CoursesPage() {
             {LEVELS.map((l) => (
               <li key={l.slug}>
                 <Link to="/levels/$level" params={{ level: l.slug }} className="hover:text-ink text-ink/75">{l.label}</Link>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 text-[10px] uppercase tracking-[0.22em] text-muted-foreground mb-3">Subjects</p>
-          <ul className="space-y-1.5 text-sm">
-            {SUBJECTS.map((s) => (
-              <li key={s}>
-                <Link to="/subjects/$subject" params={{ subject: s.toLowerCase().replace(/\s+/g, "-") }} className="hover:text-ink text-ink/75">{s}</Link>
               </li>
             ))}
           </ul>

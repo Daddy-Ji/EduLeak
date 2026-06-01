@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { TelegramPopup } from "@/components/telegram-popup";
 import { SITE_NAME, SITE_DESCRIPTION } from "@/lib/seo";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -125,6 +126,7 @@ function RootComponent() {
         <Outlet />
       </main>
       <SiteFooter />
+      <TelegramPopup />
     </QueryClientProvider>
   );
 }
