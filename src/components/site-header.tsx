@@ -60,9 +60,6 @@ export function SiteHeader() {
             >
               <Send className="size-4 text-gold" /> Join Telegram channel
             </a>
-            <Link to="/login" className="text-[11px] mt-2 uppercase tracking-[0.2em] text-muted-foreground">
-              Admin sign in
-            </Link>
           </div>
         </div>
       )}
