@@ -11,12 +11,14 @@ export const LEVELS = [
   { slug: "jee", label: "JEE" },
   { slug: "neet", label: "NEET" },
   { slug: "college", label: "College" },
+  { slug: "other", label: "Other" },
 ] as const;
 
 // Official Telegram channel — replace with your real invite link
 export const TELEGRAM_URL = "https://t.me/eduleak";
 
 export const SUBJECTS = [
+  "All in One",
   "Mathematics",
   "Physics",
   "Chemistry",
