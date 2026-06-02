@@ -34,12 +34,6 @@ export function SiteHeader() {
               {n.label}
             </Link>
           ))}
-          <Link
-            to="/login"
-            className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground hover:text-ink"
-          >
-            Admin
-          </Link>
         </nav>
         <button
           aria-label="Toggle menu"
