@@ -97,6 +97,45 @@ function Index() {
           </div>
         </div>
       </section>
+
+      <section className="rule bg-mist/30">
+        <div className="container-edit py-16">
+          <div className="flex items-end justify-between gap-6 mb-10">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.28em] text-muted-foreground">№ 002 · The team</p>
+              <h2 className="mt-3 font-display text-3xl sm:text-5xl leading-[1] text-ink">
+                The Masterminds <span className="italic font-normal">Behind EduLeak</span>
+              </h2>
+            </div>
+            <div className="hidden sm:block h-px flex-1 bg-border max-w-xs" />
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border border border-border">
+            {[
+              { name: "Aarav Mehta", role: "Founder & Curator", bio: "Ex-IIT aspirant turned librarian. Believes every notebook deserves a second life.", tag: "01" },
+              { name: "Saanvi Kapoor", role: "Head of Content", bio: "Maps syllabi by hand. Hunts the cleanest PDFs across the open web.", tag: "02" },
+              { name: "Rohan Iyer", role: "JEE / NEET Lead", bio: "10+ years coaching. Picks problem sets the way sommeliers pick wine.", tag: "03" },
+              { name: "Meera Joshi", role: "Design & Story", bio: "Treats every course page like a magazine spread. Hates clutter.", tag: "04" },
+            ].map((m, i) => (
+              <article
+                key={m.name}
+                className="bg-background p-6 sm:p-8 group hover:bg-paper transition-colors animate-fade-up"
+                style={{ animationDelay: `${i * 80}ms` }}
+              >
+                <div className="flex items-start justify-between">
+                  <div className="size-14 rounded-full bg-gradient-to-br from-gold to-gold-soft flex items-center justify-center font-display text-xl text-ink">
+                    {m.name.split(" ").map((p) => p[0]).join("")}
+                  </div>
+                  <span className="num-display text-xs text-gold">{m.tag}</span>
+                </div>
+                <h3 className="mt-5 font-display text-xl text-ink">{m.name}</h3>
+                <p className="mt-1 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">{m.role}</p>
+                <p className="mt-4 text-sm text-ink/75 leading-relaxed">{m.bio}</p>
+              </article>
+            ))}
+          </div>
+          <p className="mt-6 text-xs text-muted-foreground italic">Placeholder profiles — swap with the real team anytime.</p>
+        </div>
+      </section>
     </div>
   );
 }
