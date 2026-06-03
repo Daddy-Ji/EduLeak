@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { listPublishedCourses } from "@/lib/courses.functions";
 import { CourseCard } from "@/components/course-card";
 import { HeroIllustration } from "@/components/hero-illustration";
-import { LEVELS, SITE_DESCRIPTION, SITE_NAME } from "@/lib/seo";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+import { INSTITUTES, SITE_DESCRIPTION, SITE_NAME } from "@/lib/seo";
 
 const featuredQO = queryOptions({
   queryKey: ["courses", "featured"],
@@ -29,11 +31,36 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const { data } = useSuspenseQuery(featuredQO);
+  useScrollReveal();
+
+  useEffect(() => {
+    const addBackgroundParticles = () => {
+      const bgElements = document.querySelectorAll('.bg-particles-container');
+      bgElements.forEach((container) => {
+        if (container.children.length === 0) {
+          for (let i = 0; i < 5; i++) {
+            const particle = document.createElement('div');
+            particle.className = `particle particle-${(i % 5) + 1}`;
+            particle.style.width = `${20 + Math.random() * 40}px`;
+            particle.style.height = particle.style.width;
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.background = `oklch(0.74 0.12 80 / ${0.1 + Math.random() * 0.2})`;
+            (container as HTMLElement).appendChild(particle);
+          }
+        }
+      });
+    };
+
+    addBackgroundParticles();
+  }, []);
+
   return (
     <div>
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden bg-particles-container">
         <div className="blob bg-[#FFD1A8]/50 size-72 -top-20 -left-10 animate-blob" />
         <div className="blob bg-[#F4A85E]/40 size-80 top-40 -right-16 animate-blob" style={{ animationDelay: "3s" }} />
+        <div className="blob bg-[#E8C05E]/30 size-96 bottom-0 -left-1/3 animate-float-drift" style={{ animationDelay: "5s" }} />
         <div className="container-edit relative pt-12 sm:pt-20 pb-16">
           <div className="grid lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-16 items-center">
             <div>
@@ -47,8 +74,7 @@ function Index() {
               </h1>
               <div className="mt-8 grid sm:grid-cols-[1fr_auto] gap-6 items-end animate-fade-up delay-200">
                 <p className="max-w-xl text-base sm:text-lg text-ink/80">
-                  EduLeak is a hand-curated library of free courses, video lessons, and PDF notes for
-                  students from <em>class 9 through college</em> — plus dedicated tracks for <strong>JEE</strong> and <strong>NEET</strong>.
+                  EduLeak is a hand-curated library of free courses, video lessons, and PDF notes from India's top coaching institutes.
                 </p>
                 <Link
                   to="/courses"
@@ -68,7 +94,7 @@ function Index() {
       <section className="rule">
         <div className="container-edit py-12">
           <div className="flex items-baseline justify-between gap-4 mb-6">
-            <h2 className="font-display text-2xl sm:text-3xl">Recent additions</h2>
+            <h2 className="font-display text-2xl sm:text-3xl scroll-reveal">Recent additions</h2>
             <Link to="/courses" className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground hover:text-ink">All →</Link>
           </div>
           {data.courses.length === 0 ? (
@@ -76,7 +102,7 @@ function Index() {
           ) : (
             <div>
               {data.courses.map((c, i) => (
-                <div key={c.id} className="animate-fade-up" style={{ animationDelay: `${i * 70}ms` }}>
+                <div key={c.id} className="scroll-reveal" style={{ animationDelay: `${i * 70}ms` }}>
                   <CourseCard course={c} index={i} />
                 </div>
               ))}
@@ -87,19 +113,48 @@ function Index() {
 
       <section className="rule">
         <div className="container-edit py-12">
-          <p className="text-[11px] uppercase tracking-[0.28em] text-muted-foreground">By level</p>
-          <div className="mt-4 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-px bg-border">
-            {LEVELS.map((l, i) => (
+          <p className="text-[11px] uppercase tracking-[0.28em] text-muted-foreground scroll-reveal">By institute</p>
+          <h2 className="mt-2 font-display text-2xl sm:text-3xl text-ink scroll-reveal">Top coaching platforms</h2>
+          <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            {INSTITUTES.map((inst, i) => (
               <Link
-                key={l.slug}
+                key={inst.slug}
                 to="/levels/$level"
-                params={{ level: l.slug }}
-                className="bg-background p-5 group hover:bg-mist transition-all hover-lift animate-fade-up"
+                params={{ level: inst.slug }}
+                className="scroll-reveal group relative bg-background border border-border rounded-sm p-5 flex flex-col gap-3 hover:border-ink hover:shadow-md transition-all hover-lift"
                 style={{ animationDelay: `${i * 60}ms` }}
               >
-                <p className="num-display text-2xl text-gold">{String(i + 1).padStart(2, "0")}</p>
-                <p className="mt-3 font-display text-lg">{l.label}</p>
-                <p className="mt-1 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Explore →</p>
+                <div className="flex items-center gap-3">
+                  <div
+                    className="size-10 rounded-sm flex items-center justify-center shrink-0 overflow-hidden border border-border"
+                    style={{ background: inst.color + "15" }}
+                  >
+                    <img
+                      src={inst.logoUrl}
+                      alt={`${inst.label} logo`}
+                      className="size-7 object-contain"
+                      onError={(e) => {
+                        const el = e.currentTarget;
+                        el.style.display = "none";
+                        const fallback = el.nextElementSibling as HTMLElement;
+                        if (fallback) fallback.style.display = "flex";
+                      }}
+                    />
+                    <span
+                      className="hidden size-7 items-center justify-center font-display text-sm font-bold"
+                      style={{ color: inst.color }}
+                    >
+                      {inst.shortLabel.slice(0, 2).toUpperCase()}
+                    </span>
+                  </div>
+                  <div className="min-w-0">
+                    <p className="font-display text-base leading-tight text-ink truncate">{inst.shortLabel}</p>
+                  </div>
+                </div>
+                <p className="text-[11px] text-muted-foreground leading-relaxed line-clamp-2">{inst.tagline}</p>
+                <p className="mt-auto text-[10px] uppercase tracking-[0.18em] text-ink/50 group-hover:text-ink transition-colors">
+                  Explore →
+                </p>
               </Link>
             ))}
           </div>
@@ -110,8 +165,8 @@ function Index() {
         <div className="container-edit py-16">
           <div className="flex items-end justify-between gap-6 mb-10">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.28em] text-muted-foreground">№ 002 · The team</p>
-              <h2 className="mt-3 font-display text-3xl sm:text-5xl leading-[1] text-ink">
+              <p className="text-[11px] uppercase tracking-[0.28em] text-muted-foreground scroll-reveal">№ 002 · The team</p>
+              <h2 className="mt-3 font-display text-3xl sm:text-5xl leading-[1] text-ink scroll-reveal">
                 The Masterminds <span className="italic font-normal">Behind EduLeak</span>
               </h2>
             </div>
@@ -126,7 +181,7 @@ function Index() {
             ].map((m, i) => (
               <article
                 key={m.name}
-                className="bg-background p-6 sm:p-8 group hover:bg-paper transition-colors animate-fade-up"
+                className="bg-background p-6 sm:p-8 group hover:bg-paper transition-colors scroll-reveal"
                 style={{ animationDelay: `${i * 80}ms` }}
               >
                 <div className="flex items-start justify-between">
@@ -141,7 +196,7 @@ function Index() {
               </article>
             ))}
           </div>
-          <p className="mt-6 text-xs text-muted-foreground italic">Placeholder profiles — swap with the real team anytime.</p>
+          <p className="mt-6 text-xs text-muted-foreground italic scroll-reveal">Placeholder profiles — swap with the real team anytime.</p>
         </div>
       </section>
     </div>
