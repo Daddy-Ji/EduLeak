@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { listPublishedCourses } from "@/lib/courses.functions";
 import { CourseCard } from "@/components/course-card";
+import { HeroIllustration } from "@/components/hero-illustration";
 import { LEVELS, SITE_DESCRIPTION, SITE_NAME } from "@/lib/seo";
 
 const featuredQO = queryOptions({
