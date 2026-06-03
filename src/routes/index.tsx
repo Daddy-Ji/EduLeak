@@ -38,7 +38,7 @@ function Index() {
           <div className="grid lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-16 items-center">
             <div>
               <p className="text-[11px] uppercase tracking-[0.28em] text-muted-foreground animate-fade-up">
-                № 001 · A reading room for students
+                № 001 · A reading room for students — EduLeak
               </p>
               <h1 className="mt-5 font-display text-5xl sm:text-7xl md:text-8xl leading-[0.95] text-ink animate-fade-up delay-100">
                 Learn freely,
