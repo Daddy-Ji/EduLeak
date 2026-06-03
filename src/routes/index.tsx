@@ -32,28 +32,35 @@ function Index() {
   return (
     <div>
       <section className="relative overflow-hidden">
-        <div className="blob bg-gold/40 size-72 -top-20 -left-10 animate-blob" />
-        <div className="blob bg-gold-soft/60 size-80 top-40 -right-16 animate-blob" style={{ animationDelay: "3s" }} />
-        <div className="container-edit relative pt-12 sm:pt-24 pb-16">
-          <p className="text-[11px] uppercase tracking-[0.28em] text-muted-foreground animate-fade-up">
-            № 001 · A reading room for students
-          </p>
-          <h1 className="mt-5 font-display text-5xl sm:text-7xl md:text-8xl leading-[0.95] text-ink animate-fade-up delay-100">
-            Learn freely,
-            <br />
-            <span className="italic font-normal shimmer-text">without the paywall.</span>
-          </h1>
-          <div className="mt-8 grid sm:grid-cols-[1fr_auto] gap-6 items-end animate-fade-up delay-200">
-            <p className="max-w-xl text-base sm:text-lg text-ink/80">
-              EduLeak is a hand-curated library of free courses, video lessons, and PDF notes for
-              students from <em>class 9 through college</em> — plus dedicated tracks for <strong>JEE</strong> and <strong>NEET</strong>.
-            </p>
-            <Link
-              to="/courses"
-              className="self-start sm:self-end inline-flex items-center gap-3 border-b-2 border-ink pb-1 text-sm uppercase tracking-[0.18em] hover:gap-4 transition-all"
-            >
-              Browse the library →
-            </Link>
+        <div className="blob bg-[#FFD1A8]/50 size-72 -top-20 -left-10 animate-blob" />
+        <div className="blob bg-[#F4A85E]/40 size-80 top-40 -right-16 animate-blob" style={{ animationDelay: "3s" }} />
+        <div className="container-edit relative pt-12 sm:pt-20 pb-16">
+          <div className="grid lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-16 items-center">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.28em] text-muted-foreground animate-fade-up">
+                № 001 · A reading room for students
+              </p>
+              <h1 className="mt-5 font-display text-5xl sm:text-7xl md:text-8xl leading-[0.95] text-ink animate-fade-up delay-100">
+                Learn freely,
+                <br />
+                <span className="italic font-normal shimmer-text">without the paywall.</span>
+              </h1>
+              <div className="mt-8 grid sm:grid-cols-[1fr_auto] gap-6 items-end animate-fade-up delay-200">
+                <p className="max-w-xl text-base sm:text-lg text-ink/80">
+                  EduLeak is a hand-curated library of free courses, video lessons, and PDF notes for
+                  students from <em>class 9 through college</em> — plus dedicated tracks for <strong>JEE</strong> and <strong>NEET</strong>.
+                </p>
+                <Link
+                  to="/courses"
+                  className="self-start sm:self-end inline-flex items-center gap-3 border-b-2 border-ink pb-1 text-sm uppercase tracking-[0.18em] hover:gap-4 transition-all"
+                >
+                  Browse the library →
+                </Link>
+              </div>
+            </div>
+            <div className="order-first lg:order-none">
+              <HeroIllustration />
+            </div>
           </div>
         </div>
       </section>
