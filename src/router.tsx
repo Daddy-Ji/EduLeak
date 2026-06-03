@@ -3,6 +3,7 @@ import { createRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 
 export const getRouter = () => {
+  // Preview rebuild trigger — force fresh build
   const queryClient = new QueryClient();
 
   const router = createRouter({
